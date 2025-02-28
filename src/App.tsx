@@ -6,7 +6,7 @@ function App() {
   const fetchCryptos = useCryptoStore((state) => state.fetchCryptos)
 
   useEffect(() => {
-    fetchCryptos
+    fetchCryptos()
   }, [])
 
   return (
