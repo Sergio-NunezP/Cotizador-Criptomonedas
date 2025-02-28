@@ -2,12 +2,12 @@ import { useCryptoStore } from "../store"
 import { currencies } from "../data"
 import React, { ChangeEvent, useState } from "react"
 import { Pair } from "../types"
-import { object } from "zod"
 import ErrorMessage from "./ErrorMessage"
 
 
 export default function CryptoSearchForm() {
     const cryptocurrencies = useCryptoStore((state) => state.cryptocurrencies)
+    const fetchData = useCryptoStore((state) => state.fetchData)
     const [pair, setPair] = useState<Pair>({
         currency: '',
         criptocurrency: ''
@@ -29,6 +29,7 @@ export default function CryptoSearchForm() {
         }
         setError('')
         // Consultar la API
+        fetchData(pair)
     }
 
     return (
