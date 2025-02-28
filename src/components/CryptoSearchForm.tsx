@@ -1,7 +1,9 @@
 import { useCryptoStore } from "../store"
 import { currencies } from "../data"
-import { ChangeEvent, useState } from "react"
+import React, { ChangeEvent, useState } from "react"
 import { Pair } from "../types"
+import { object } from "zod"
+import ErrorMessage from "./ErrorMessage"
 
 
 export default function CryptoSearchForm() {
@@ -10,6 +12,7 @@ export default function CryptoSearchForm() {
         currency: '',
         criptocurrency: ''
     })
+    const [error, setError] = useState('')
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setPair({
@@ -18,10 +21,23 @@ export default function CryptoSearchForm() {
         })
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (Object.values(pair).includes('')) {
+            setError('Todos los campos son obligatorios')
+            return
+        }
+        setError('')
+        // Consultar la API
+    }
+
     return (
         <form
             className="form"
+            onSubmit={handleSubmit}
         >
+
+            {error && <ErrorMessage>{error}</ErrorMessage>}
 
             <div className="field">
                 <label htmlFor="currency">Mondeda:</label>
@@ -29,6 +45,7 @@ export default function CryptoSearchForm() {
                     name="currency"
                     id="currency"
                     onChange={handleChange}
+                    value={pair.currency}
                 >
                     <option value="">--Seleccione</option>
                     {currencies.map(currency => (
@@ -43,6 +60,7 @@ export default function CryptoSearchForm() {
                     name="criptocurrency"
                     id="criptocurrency"
                     onChange={handleChange}
+                    value={pair.criptocurrency}
                 >
                     <option value="">--Seleccione</option>
                     {cryptocurrencies.map(crypto => (
