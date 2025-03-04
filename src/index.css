@@ -1,6 +1,6 @@
 :root {
   --white: #FFFF;
-  --primary: #61ECBC;
+  --primary: #af13cf;
   --black: #182339;
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 .form select {
-  background-color: #ECEBEB;
+  background-color: #cb9eb1;
   border: none;
   padding: 1rem;
   border-radius: 1rem;
@@ -78,7 +78,7 @@ body {
 }
 
 .form [type="submit"]:hover {
-  background-color: #0CB387;
+  background-color: #a04cb1;
 }
 
 .result-wrapper {
